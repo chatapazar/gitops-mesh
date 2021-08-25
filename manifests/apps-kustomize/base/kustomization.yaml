@@ -1,10 +1,16 @@
 resources:
 - demo-rolebinding.yaml
 - frontend.yaml
+- frontend2.yaml
+- frontend-service1.yaml
+- frontend-service2.yaml
+- frontend-route.yaml
 - frontend-service.yaml
 - frontend-gateway.yaml
 - frontend-destination-rule.yaml
 - frontend-virtual-service.yaml
 - backend.yaml
+- backend2.yaml
+- backend-service.yaml
 - backend-destination-rule.yaml
 - backend-virtual-service-v1-v2-50-50.yaml

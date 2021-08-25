@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-v1
+  name: frontend-v2
   namespace: project1
   annotations:
     app.openshift.io/connects-to: >-
-      [{"apiVersion":"apps/v1","kind":"Deployment","name":"backend-v1"},{"apiVersion":"apps/v1","kind":"Deployment","name":"backend-v2"}]   
+      [{"apiVersion":"apps/v1","kind":"Deployment","name":"backend-v1"},{"apiVersion":"apps/v1","kind":"Deployment","name":"backend-v2"}]
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: 'https://gitlab.com/ocp-demo/frontend-js'
   labels:
@@ -20,19 +20,19 @@ spec:
   selector:
     matchLabels:
       app: frontend
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: frontend
-        version: v1
+        version: v2
         maistra.io/expose-route: "true"
       annotations:
         sidecar.istio.io/inject: 'true'
     spec:
       containers:
       - name: frontend
-        image: quay.io/voravitl/frontend-js:v1
+        image: quay.io/voravitl/frontend-js:v2
         imagePullPolicy: Always
         env:
           - name: BACKEND_URL

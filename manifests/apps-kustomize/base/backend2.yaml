@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-v1
+  name: backend-v2
   namespace: project1
   annotations:
     app.openshift.io/vcs-ref: master
@@ -18,13 +18,13 @@ spec:
   selector:
     matchLabels:
       app: backend
-      version: v1
+      version: v2
   template:
     metadata:
       creationTimestamp: null
       labels:
         app: backend
-        version: v1
+        version: v2
       annotations:
         sidecar.istio.io/inject: "true"
     spec:
@@ -35,15 +35,15 @@ spec:
         resources:
           requests:
             cpu: "0.05"
-            memory: 40Mi
+            memory: 60Mi
           limits:
             cpu: "0.2"
             memory: 120Mi
         env:
           - name: APP_BACKEND
-            value: https://httpbin.org/status/200
+            value: https://httpbin.org/delay/5
           - name: APP_VERSION
-            value: v1
+            value: v2
           - name: quarkus.log.console.color
             value: 'false'
         ports:
@@ -52,5 +52,4 @@ spec:
       - effect: NoExecute
         key: node.kubernetes.io/unreachable
         operator: Exists
-        tolerationSeconds: 60   
-
+        tolerationSeconds: 60
