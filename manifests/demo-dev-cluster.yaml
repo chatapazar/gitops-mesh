@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-dev-cluster
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: project1
+    name: dev-cluster
+  project: default
+  source:
+    directory:
+      recurse: false
+    path: manifests/apps-kustomize/overlays/dev
+    repoURL: https://github.com/chatapazar/gitops-mesh
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
