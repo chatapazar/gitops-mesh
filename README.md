@@ -44,3 +44,6 @@ istio-system project, grafana, manage, control plane, service dashboard
 gitops
 --> URL: https://openshift-gitops-server-openshift-gitops.apps.cluster-270c.270c.sandbox140.opentlc.com
 --> admin password: BgEMLkcm2i4Fpz7GtUArTwW13saPKdjf
+
+PASSWORD=$(oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-) 2>/dev/null
+echo $PASSWORD
