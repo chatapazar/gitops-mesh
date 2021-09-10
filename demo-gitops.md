@@ -7,6 +7,7 @@ install operator
 - Jaeger
 - Kiali
 - OpenShift Service Mesh
+- OpenShift GitOps Operator
 
 cd openshift-demo
 oc new-project istio-system
@@ -23,14 +24,38 @@ SUBDOMAIN=$(oc whoami --show-console|awk -F'apps.' '{print $2}')
 echo $SUBDOMAIN
 ---> in git --> gitops-mesh
 cd gitops-mesh
-oc apply -f manifests/frontend.yaml
-oc apply -f manifests/frontend-service.yaml
-oc apply -f manifests/frontend-gateway.yaml
-oc apply -f manifests/frontend-destination-rule.yaml
-oc apply -f manifests/frontend-virtual-service.yaml --> change domain
-oc apply -f manifests/backend.yaml
-oc apply -f manifests/backend-destination-rule.yaml
-oc apply -f manifests/backend-virtual-service-v1-v2-50-50.yaml
+base/frontend-gateway.yaml  --> change domain
+base/frontend-virtual-service.yaml --> change domain
+--> commit to git
+
+
+oc get pods -n openshift-gitops
+
+
+
+Step Demo
+###################################################################
+gitops
+
+ARGOCD=$(oc get route/openshift-gitops-server -n openshift-gitops -o jsonpath='{.spec.host}')
+echo https://$ARGOCD
+
+
+PASSWORD=$(oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-) 2>/dev/null
+echo $PASSWORD
+
+create manual application
+- application name: demo-mesh
+- project: default
+- sync policy: manual
+- source: https://github.com/chatapazar/gitops-mesh.git
+- path: manifests/apps-kustomize/overlays/dev
+- cluster: default
+- namespace: project1
+- kustomize: leave default
+- create
+
+- sync
 
 --> test
 
@@ -47,18 +72,3 @@ Namespace: select checkbox "project1"
 Display: select checkbox "Requests percentage" and "Traffic animation"
 applications, frontend, traces, view in tracting
 istio-system project, grafana, manage, control plane, service dashboard
-
-
-gitops
---> URL: https://openshift-gitops-server-openshift-gitops.apps.cluster-270c.270c.sandbox140.opentlc.com
---> admin password: BgEMLkcm2i4Fpz7GtUArTwW13saPKdjf
-
-PASSWORD=$(oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-) 2>/dev/null
-echo $PASSWORD
-
-
-Step Demo
-###################################################################
-
-
-
