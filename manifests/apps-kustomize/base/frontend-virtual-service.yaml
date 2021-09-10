@@ -7,7 +7,7 @@ spec:
   hosts:
   - frontend.apps.cluster-550d.550d.sandbox1520.opentlc.com
   gateways:
-  - istio-system/frontend-gateway
+  - project1/frontend-gateway
   http:
   - route:
     - destination:
