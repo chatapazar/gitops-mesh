@@ -12,5 +12,5 @@ spec:
       name: http2
       protocol: HTTP
     hosts:
-    - 'frontend.apps.cluster-270c.270c.sandbox140.opentlc.com'
+    - 'frontend.apps.cluster-550d.550d.sandbox1520.opentlc.com'
     

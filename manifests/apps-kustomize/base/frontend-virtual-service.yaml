@@ -5,7 +5,7 @@ metadata:
   namespace: project1
 spec:
   hosts:
-  - frontend.apps.cluster-270c.270c.sandbox140.opentlc.com
+  - frontend.apps.cluster-550d.550d.sandbox1520.opentlc.com
   gateways:
   - istio-system/frontend-gateway
   http:
