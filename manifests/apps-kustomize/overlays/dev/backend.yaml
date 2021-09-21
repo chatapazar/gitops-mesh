@@ -4,4 +4,4 @@ metadata:
   name: backend-v1
   namespace: project1
 spec:
-  replicas: 3
+  replicas: 2
