@@ -59,7 +59,7 @@ create manual application
 
 --> test
 
-FRONTEND_ISTIO_ROUTE=$(oc get route -n istio-system|grep istio-system-frontend-gateway |awk '{print $2}')
+FRONTEND_ISTIO_ROUTE=$(oc get route -n istio-system|grep project1-frontend-gateway |awk '{print $2}')
 while [ 1 ];
 do
         OUTPUT=$(curl -s $FRONTEND_ISTIO_ROUTE)
@@ -72,3 +72,5 @@ Namespace: select checkbox "project1"
 Display: select checkbox "Requests percentage" and "Traffic animation"
 applications, frontend, traces, view in tracting
 istio-system project, grafana, manage, control plane, service dashboard
+
+remark: if you have problem about gateway, you can restart pod 'istiod'
