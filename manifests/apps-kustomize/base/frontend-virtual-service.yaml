@@ -5,7 +5,7 @@ metadata:
   namespace: project1
 spec:
   hosts:
-  - frontend.apps.cluster-378a.378a.sandbox1405.opentlc.com
+  - frontend.apps.cluster-deff.deff.sandbox1488.opentlc.com
   gateways:
   - project1/frontend-gateway
   http:
